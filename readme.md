@@ -170,14 +170,14 @@ path('hello/', views.say_hello)
     from django.contrib import admin
     from django.urls import path, include
 
-urlpatterns = [
-path('admin/', admin.site.urls),
-path('playground/', include('playground.urls'))
-]
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('playground/', include('playground.urls'))
+    ]
 
 ## <hr>
 
-Templates
+# Templates
 
 ## <hr>
 
@@ -185,7 +185,7 @@ Templates
 
 # templates
 
--   hello.html
+    - hello.html
 
 # Instead return HttpResponse();
 
@@ -195,14 +195,16 @@ Templates
 -   def say_hello (request):
     return render(request, 'home.html')
 
-================================================
-Dynamic display views content inside template
-================================================
+## <hr>
 
-# views.py
+# Dynamic display views content inside template
 
-def say_hello (request):
-return render(request, 'home.html',{ 'name' : "binod"})
+## <hr>
+
+    # views.py
+
+    def say_hello (request):
+    return render(request, 'home.html',{ 'name' : "binod"})
 
 # home.html
 
@@ -210,47 +212,51 @@ return render(request, 'home.html',{ 'name' : "binod"})
 
 # Conditionally display
 
-{% if name %}
+    {% if name %}
 
-  <h1>Hello {{ name }}</h1>
-  {% else %}
-  <h1>Hello World</h1>
-  {% endif %}
+    <h1>Hello {{ name }}</h1>
+    {% else %}
+    <h1>Hello World</h1>
+    {% endif %}
 
 # Loop
 
-==============
-def say_hello (request):
-names = [{'name': "Binod"}, {'name': "Manisha"}, {'name': "Nikita"}]
-return render(request, 'home.html', { 'datas' : names})
+## <hr>
 
-<ul>
-  {% for person in datas %}
-    <li>{{ person.name }}</li>
-  {% endfor %}
-</ul>
+    def say_hello (request):
+    names = [{'name': "Binod"}, {'name': "Manisha"}, {'name': "Nikita"}]
+    return render(request, 'home.html', { 'datas' : names})
 
-================================================
-Dynamic Images
-================================================
+    <ul>
+    {% for person in datas %}
+        <li>{{ person.name }}</li>
+    {% endfor %}
+    </ul>
+
+## <hr>
+
+# Dynamic Images
+
+## <hr>
 
 # Create static folder under main root folder
 
-Exampple:
-/static/images
-/static/css
-/static/js
+    Exampple:
+        /static/images
+        /static/css
+        /static/js
 
-# views.py
+    # views.py
 
-======================
-def say_hello (request):
-watches = [
-{'name': "Gold", 'image': "images/AuraGold.webp"},
-{'name': "Silver", 'image': "images/AuraSilver.webp"},
-{'name': "Black", 'image': "images/AuraBlack.webp"},
-]
-return render(request, 'home.html', { 'datas' : watches})
+## <hr>
+
+    def say_hello (request):
+    watches = [
+    {'name': "Gold", 'image': "images/AuraGold.webp"},
+    {'name': "Silver", 'image': "images/AuraSilver.webp"},
+    {'name': "Black", 'image': "images/AuraBlack.webp"},
+    ]
+    return render(request, 'home.html', { 'datas' : watches})
 
 # home.html
 
@@ -266,13 +272,16 @@ return render(request, 'home.html', { 'datas' : watches})
 	{% endfor %}
 </ul>
 
-================================================================================================
-Base Template Layouts
-================================================================================================
+## <hr>
+
+# Base Template Layouts
+
+## <hr>
 
 # templates/base.html
 
-=========================
+## <hr>
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -302,9 +311,9 @@ Base Template Layouts
 
 </html>
 
-# Create CSS folder with styles.css
+## Create CSS folder with styles.css
 
-=========================
+## <hr>
 
 -   styles.css
     body {
@@ -314,9 +323,10 @@ Base Template Layouts
     background: green;
     }
 
-# Extending the Base Template
+## Extending the Base Template
 
-=========================
+## <hr>
+
 templates/home.html
 templates/services.html
 templates/appointments.html
@@ -327,9 +337,10 @@ templates/contact.html
 <p>This is my page content.</p>
 {% endblock %} {% block title %} home - Beauty Parlor {% endblock %}
 
-# Including Additional Templates (Optional)
+## Including Additional Templates (Optional)
 
-=========================
+## <hr>
+
 templates/includes/navbar.html
 
 <nav>
@@ -341,14 +352,16 @@ templates/includes/navbar.html
 	</ul>
 </nav>
 
-# import in base.html template
+## import in base.html template
 
-=========================
+## <hr>
+
 {% include 'includes/navbar.html' %}
 
-# Static Files (CSS/JS)
+## Static Files (CSS/JS)
 
-=========================
+## <hr>
+
 from pathlib import Path
 import os
 
@@ -364,9 +377,10 @@ TEMPLATES = [
 }
 ]
 
-# URL Configuration
+## URL Configuration
 
-=========================
+## <hr>
+
 urls.py : Project
 
 from django.contrib import admin
@@ -389,9 +403,10 @@ path('appointments/', views.appointments, name='appointments'),
 path('contact/', views.contact, name='contact'),
 ]
 
-# View Configuration
+## View Configuration
 
-=========================
+## <hr>
+
 from django.shortcuts import render
 
 def home(request):
@@ -406,34 +421,36 @@ return render(request, 'appointments.html')
 def contact(request):
 return render(request, 'contact.html')
 
-===========================================================================
-Summery Flow in Django
-===========================================================================
+# <hr>
 
-# Create Project : One Project
+# Summery Flow in Django
 
-# Create App : App can one or more
+# <hr>
 
-# settings.py
+## Create Project : One Project
 
--   configures templates and static files/images
--   INSTALLED_APPS = [register_app]
+## Create App : App can one or more
 
-# urls.py : project
+## settings.py
+
+    - configures templates and static files/images
+    - INSTALLED_APPS = [register_app]
+
+## urls.py : project
 
 -   default 'admin'
 -   include other app urls
 
-# urls: app
+## urls: app
 
 -   defind path/url name
 -   point class
 
-# views
+## views
 
 -   defined class
 -   return render templates
 
-# templates
+## templates
 
 -   its responsible to display html content
